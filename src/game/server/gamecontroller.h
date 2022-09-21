@@ -475,7 +475,7 @@ public:
 	// ==================
 	/*
 		Function: DoTeamBalance
-			Called when team balance time occurs and allowed team difference is 
+			Called when team balance time occurs and allowed team difference is
 	*/
 	virtual void DoTeamBalance();
 
@@ -487,7 +487,7 @@ public:
 				to check whether it is gameover
 			In non-round game:
 				this won't be called
-		
+
 		Note:
 			You should call EndRound() to end the round
 	*/
@@ -499,7 +499,7 @@ public:
 				this will be called if EndRound is called
 			In non-round game:
 				this will be called after gamestate is updated and before OnPostTick
-			
+
 		Note:
 			You should call EndMatch() to end the match
 
@@ -509,7 +509,7 @@ public:
 	/*
 		Function: GetFlagState
 			Called during Snap() to send flag information to clients
-		
+
 		Return:
 			true if the game wants to send flag info.
 	*/
@@ -519,7 +519,7 @@ public:
 		Function: IsSpawnRandom
 			Whether the character's spawn is randomly choosen
 				or distance based
-		
+
 		Return:
 			true if the game wants to send flag info.
 	*/
@@ -527,8 +527,8 @@ public:
 
 	/*
 		Function: SpawnPosDangerScore
-			How danger is the character at this position 
-		
+			How danger is the character at this position
+
 		Arguments:
 			Pos - position that a character is trying to spawn at
 			SpawningTeam - which team is the spawning character
@@ -547,7 +547,7 @@ public:
 			Spec - the spectating player
 			Target - the target player that is being spectated
 				This player is guaranteed to be in the room
-		
+
 		Return:
 			bool - true if can spectate
 
@@ -560,7 +560,7 @@ public:
 				but the game will only pause after this has been true
 				This will be called every tick starting from a player calling pause
 				And will stop being called after pause
-		
+
 		Arguments:
 			RequestedTicks - how long has the request been issued
 
@@ -618,7 +618,7 @@ public:
 			When this is called:
 				the world clear request is set, but has not been cleared yet
 				if you want to cancel player's spawn use OnWorldReset instead
-		
+
 		Arguments:
 			IsRound - whether it is a round that is starting
 	*/
@@ -711,9 +711,9 @@ public:
 		Arguments:
 			pChr - The CCharacter that was being damaged
 			Force - Knockback force
-					Force is a reference so you can change it. 
+					Force is a reference so you can change it.
 			Dmg - Raw damage (will be already halved for self damage, and will be 0 for friendly fire)
-					Dmg is a reference so you can change it. 
+					Dmg is a reference so you can change it.
 			From - Attacker's ClientID
 			WeaponType - Weapon's appearence
 			WeaponID - Weapon class identifier
@@ -758,6 +758,15 @@ public:
 	*/
 	virtual bool OnCharacterProximateTile(class CCharacter *pChr, int MapIndex) { return false; };
 
+	/*
+		Function: OnCharacterSwitchWeapon
+			Called when the player switch weapon
+
+		Arguments:
+			pChr - The CCharacter that switching weapon.
+			Wheel - 0=Down,1=Up.
+	*/
+	virtual void OnCharacterSwitchWeapon(class CCharacter *pChr, int Wheel){};
 	/*
 		Function: OnEntity
 			Called when the map is loaded to process an entity
@@ -815,15 +824,15 @@ public:
 	/*
 		Function: IsDisruptiveLeave
 			Whether the player is disrupting the game by leaving
-		
+
 		Arguments:
 			pPlayer - checking player
-		
+
 		Return:
 			bool - player can't switch room or join spectator if set to true
 				also, disconnected players' characters will not be
 				killed until this check returns false.
-		
+
 		Note:
 			This method will be called every tick
 	*/
@@ -836,7 +845,7 @@ public:
 		Function: GetTeamName
 			Return the team name, will be used in joining message
 				and team change message.
-		
+
 		Arguments:
 			Team - which team
 

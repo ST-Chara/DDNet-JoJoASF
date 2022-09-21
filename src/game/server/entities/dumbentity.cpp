@@ -64,6 +64,19 @@ void CDumbEntity::TeleportTo(vec2 Pos)
 	m_PrevPrevPos = m_PrevPos = m_Pos = Pos;
 }
 
+void CDumbEntity::SmoothMove(vec2 Pos, float Scale, bool ThroughWalls)
+{
+	vec2 To;
+	vec2 EndPos;
+	To.x = (float)((Pos.x - m_Pos.x)/Scale);
+	To.y = (float)((Pos.y - m_Pos.y)/Scale);
+	EndPos = m_Pos+To;
+	if(!GameServer()->Collision()->IntersectLine(GetPos(), vec2(EndPos.x, m_Pos.y), NULL, NULL) && !ThroughWalls)
+		m_Pos.x += To.x;
+	if(!GameServer()->Collision()->IntersectLine(GetPos(), vec2(m_Pos.x, EndPos.y), NULL, NULL) && !ThroughWalls)
+		m_Pos.y += To.y;
+}
+
 void CDumbEntity::SetLaserVector(vec2 Vector)
 {
 	m_LaserVector = Vector;

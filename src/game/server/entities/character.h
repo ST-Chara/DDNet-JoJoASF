@@ -103,6 +103,11 @@ public:
 	bool IsDisabled() const { return m_Disabled; }
 	class CPlayer *GetPlayer() { return m_pPlayer; }
 
+	// these are non-heldback inputs
+	CNetObj_PlayerInput m_LatestPrevPrevInput;
+	CNetObj_PlayerInput m_LatestPrevInput;
+	CNetObj_PlayerInput m_LatestInput;
+	
 private:
 	// player controlling this character
 	class CPlayer *m_pPlayer;
@@ -128,11 +133,6 @@ private:
 
 	// last tick that the player took any action ie some input
 	int m_LastAction;
-
-	// these are non-heldback inputs
-	CNetObj_PlayerInput m_LatestPrevPrevInput;
-	CNetObj_PlayerInput m_LatestPrevInput;
-	CNetObj_PlayerInput m_LatestInput;
 
 	// input
 	CNetObj_PlayerInput m_PrevInput;
@@ -286,6 +286,10 @@ public:
 		int m_HitOrder;
 		bool m_FirstImpact;
 	} m_HitData;
+
+	// ASF
+	int m_StandPower;
+	void SetStand(int Stand);
 };
 
 enum

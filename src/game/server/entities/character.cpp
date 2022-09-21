@@ -224,6 +224,11 @@ void CCharacter::HandleWeaponSwitch()
 	int Next = CountInput(m_LatestPrevInput.m_NextWeapon, m_LatestInput.m_NextWeapon).m_Presses;
 	int Prev = CountInput(m_LatestPrevInput.m_PrevWeapon, m_LatestInput.m_PrevWeapon).m_Presses;
 
+	if(Next)
+		Controller()->OnCharacterSwitchWeapon(this, 0); // Mouse wheel down
+	else if(Prev)
+		Controller()->OnCharacterSwitchWeapon(this, 1); // Mouse wheel up
+
 	if(Next < 128) // make sure we only try sane stuff
 	{
 		while(Next) // Next Weapon selection

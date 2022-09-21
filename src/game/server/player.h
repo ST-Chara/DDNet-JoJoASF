@@ -257,6 +257,8 @@ public:
 
 	class CFlag *m_pSpecFlag;
 	bool m_ActiveSpecSwitch;
+
+	
 };
 
 #endif

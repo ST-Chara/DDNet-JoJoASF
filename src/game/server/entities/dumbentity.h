@@ -63,6 +63,7 @@ public:
 	// Moving
 	void MoveTo(vec2 Pos);
 	void TeleportTo(vec2 Pos);
+	void SmoothMove(vec2 Pos, float Scale=10, bool ThroughWalls = true);
 
 	// Laser
 	void SetLaserVector(vec2 Vector);
