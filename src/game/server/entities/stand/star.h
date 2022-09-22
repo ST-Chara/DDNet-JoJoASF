@@ -16,7 +16,11 @@ class CStar : public IStand
 {
 public:
     CStar(CGameWorld *pGameWorld, CCharacter *pOwner);
+    ~CStar() { };
+    virtual void Attack(CCharacter *pTarget) override;
+    virtual void Attack(vec2 Pos) override;
 
+    virtual void OnStandTick() override;
 };
 
 #endif

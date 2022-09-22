@@ -958,6 +958,10 @@ set_src(GAME_SERVER GLOB_RECURSE src/game/server
   entities/projectile.h
   entities/textentity.cpp
   entities/textentity.h
+  entities/stand/stand.cpp
+  entities/stand/stand.h
+  entities/stand/star.cpp
+  entities/stand/star.h
   entity.cpp
   entity.h
   eventhandler.cpp

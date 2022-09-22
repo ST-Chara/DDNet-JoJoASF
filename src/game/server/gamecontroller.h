@@ -766,7 +766,18 @@ public:
 			pChr - The CCharacter that switching weapon.
 			Wheel - 0=Down,1=Up.
 	*/
-	virtual void OnCharacterSwitchWeapon(class CCharacter *pChr, int Wheel){};
+	virtual void OnCharacterSwitchWeapon(class CCharacter *pChr, int Wheel) { };
+
+	/*
+		Function: OnCharacterFire
+			Called when the player fire weapon.
+
+		Arguments:
+			pChr - The CCharacter that fire weapon.
+			WeaponSlot - Weapon slot.
+			WeaponID - hard to explain...(Because idk too)
+	*/
+	virtual void OnCharacterFire(class CCharacter *pChr, int WeaponSlot, int WeaponID) { };
 	/*
 		Function: OnEntity
 			Called when the map is loaded to process an entity
