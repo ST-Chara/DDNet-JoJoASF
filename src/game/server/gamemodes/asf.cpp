@@ -76,5 +76,5 @@ void CGameControllerASF::OnCharacterSwitchWeapon(CCharacter *pChr, int Wheel)
 int CGameControllerASF::OnCharacterDeath(CCharacter *pVictim, CPlayer *pKiller, int Weapon)
 {
 	if(m_Stand[pVictim->GetPlayer()->GetCID()])
-		delete m_Stand[pVictim->GetPlayer()->GetCID()];
+		m_Stand[pVictim->GetPlayer()->GetCID()]->Destroy();
 }
