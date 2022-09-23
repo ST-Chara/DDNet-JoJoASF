@@ -21,8 +21,12 @@ public:
     virtual void Attack(vec2 Pos) override;
 
     virtual void OnStandTick() override;
+    int GetOwner() { return m_Owner; };
 
     void HandleInterceptLaser();
+
+private:
+    int m_Owner;
 };
 
 #endif

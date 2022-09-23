@@ -1,6 +1,6 @@
 #include "stand.h"
 
-IStand::IStand(CGameWorld *pGameWorld, int Type, vec2 Pos, int m_Owner) : CDumbEntity(pGameWorld, Type, Pos)
+IStand::IStand(CGameWorld *pGameWorld, int Type, vec2 Pos) : CDumbEntity(pGameWorld, Type, Pos)
 {
 
 }

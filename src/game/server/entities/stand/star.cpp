@@ -4,10 +4,10 @@
 #include <game/server/entities/textentity.h>
 
 #include "star.h"
-CStar::CStar(CGameWorld *pGameWorld, CCharacter *pOwner) : IStand(pGameWorld, CDumbEntity::TYPE_PICKUP_LASER, vec2(0,0), pOwner->GetPlayer()->GetCID())
+CStar::CStar(CGameWorld *pGameWorld, CCharacter *pOwner) : IStand(pGameWorld, CDumbEntity::TYPE_PICKUP_LASER, vec2(0,0))
 {
     m_Pos = pOwner->GetPos();
-    
+    m_Owner = pOwner->GetPlayer()->GetCID();
     SetHide(false);
 }
 

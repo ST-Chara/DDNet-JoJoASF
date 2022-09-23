@@ -14,7 +14,7 @@ enum
 class IStand : public CDumbEntity
 {
 public:
-    IStand(CGameWorld *pGameWorld, int Type, vec2 Pos, int Owner);
+    IStand(CGameWorld *pGameWorld, int Type, vec2 Pos);
 
     virtual void Attack(CCharacter *pTarget) { };
     virtual void Attack(vec2 Pos) { };
@@ -29,10 +29,8 @@ public:
     void SetHide(bool Hide) { m_Hide = Hide; SetEvent(EVENT_HIDE); };
     void SetFireDelay(int Sec) { m_FireDelay = Sec*Server()->TickSpeed(); };
 
-    int GetOwner() { return m_Owner; };
     int GetFireDelay() { return m_FireDelay; };
 private:
-    int m_Owner;
     int m_State;
     int m_Event;
     bool m_Hide;
