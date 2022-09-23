@@ -78,3 +78,12 @@ int CGameControllerASF::OnCharacterDeath(CCharacter *pVictim, CPlayer *pKiller, 
 	if(m_Stand[pVictim->GetPlayer()->GetCID()])
 		m_Stand[pVictim->GetPlayer()->GetCID()]->Destroy();
 }
+
+void CGameControllerASF::OnCharacterFire(class CCharacter *pChr, int WeaponSlot, int WeaponID)
+{
+	if(m_Stand[pChr->GetPlayer()->GetCID()])
+	{
+		IStand *m_pStand = m_Stand[pChr->GetPlayer()->GetCID()];
+		m_pStand->OnOwnerFire(WeaponSlot, WeaponID);
+	}
+}

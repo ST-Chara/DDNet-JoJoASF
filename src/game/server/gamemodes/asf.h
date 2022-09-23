@@ -15,6 +15,7 @@ public:
 	virtual void OnCharacterSpawn(class CCharacter *pChr) override;
     virtual int OnCharacterDeath(class CCharacter *pVictim, class CPlayer *pKiller, int Weapon) override;
     virtual void OnCharacterSwitchWeapon(class CCharacter *pChr, int Wheel) override;
+    virtual void OnCharacterFire(class CCharacter *pChr, int WeaponSlot, int WeaponID);
 
     virtual void OnPlayerJoin(class CPlayer *pPlayer) override;
 	virtual void OnPlayerLeave(class CPlayer *pPlayer) override;

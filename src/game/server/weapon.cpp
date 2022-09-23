@@ -87,6 +87,7 @@ void CWeapon::HandleFire(vec2 Direction)
 	}
 
 	Fire(Direction);
+	GameWorld()->Controller()->OnCharacterFire(m_pOwnerChar, m_pOwnerChar->GetActiveWeapon(), m_pOwnerChar->GetWeapon(m_pOwnerChar->GetActiveWeapon())->GetWeaponID());
 	if(m_AmmoRegenDelay)
 		m_AmmoRegenStart = Server()->Tick() + (m_FireDelay + m_AmmoRegenDelay) * Server()->TickSpeed() / 1000;
 

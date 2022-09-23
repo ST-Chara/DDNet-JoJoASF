@@ -21,12 +21,15 @@ public:
     virtual void Attack(vec2 Pos) override;
 
     virtual void OnStandTick() override;
-    int GetOwner() { return m_Owner; };
+    virtual void OnStandSnap() override;
+    virtual void OnOwnerFire(int WeaponSlot, int WeaponID) override;
 
     void HandleInterceptLaser();
 
+    vec2 m_APoint;
+
 private:
-    int m_Owner;
+    int m_ATick;
 };
 
 #endif

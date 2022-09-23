@@ -1,8 +1,8 @@
 #include "stand.h"
 
-IStand::IStand(CGameWorld *pGameWorld, int Type, vec2 Pos) : CDumbEntity(pGameWorld, Type, Pos)
+IStand::IStand(CGameWorld *pGameWorld, int Type, vec2 Pos, int Owner) : CDumbEntity(pGameWorld, Type, Pos)
 {
-
+    m_Owner = Owner;
 }
 
 void IStand::Tick()
