@@ -13,13 +13,16 @@ public:
 
 	// event
 	virtual void OnCharacterSpawn(class CCharacter *pChr) override;
-    virtual void OnPlayerJoin(class CPlayer *pPlayer) override;
-	virtual void OnPlayerLeave(class CPlayer *pPlayer) override;
+    virtual int OnCharacterDeath(class CCharacter *pVictim, class CPlayer *pKiller, int Weapon) override;
     virtual void OnCharacterSwitchWeapon(class CCharacter *pChr, int Wheel) override;
 
+    virtual void OnPlayerJoin(class CPlayer *pPlayer) override;
+	virtual void OnPlayerLeave(class CPlayer *pPlayer) override;
+
+    virtual void OnInit() override;
     virtual void OnPreTick() override;
 
-    IStand *m_TestStand[MAX_CLIENTS];
+    IStand *m_Stand[MAX_CLIENTS];
 };
 
 #endif // GAME_SERVER_GAMEMODES_ASF_H

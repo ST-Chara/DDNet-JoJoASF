@@ -21,7 +21,18 @@ void CGameControllerASF::OnCharacterSpawn(CCharacter *pChr)
 	pChr->GiveWeapon(WEAPON_GUN, WEAPON_ID_PISTOL, 10);
 	pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_HAMMER, -1);
 
-	m_TestStand[pChr->GetPlayer()->GetCID()] = new CStar(GameWorld(), pChr);
+	m_Stand[pChr->GetPlayer()->GetCID()] = new CStar(GameWorld(), pChr);
+}
+
+void CGameControllerASF::OnInit()
+{
+	/*for(int i = 1; i < MAX_CLIENTS; i++)
+	{
+		GameServer()->m_apPlayers[i] = new(i) CPlayer(GameServer(), i, false);
+		Server()->SetClientName(i, "Hello");
+		Server()->SetClientClan(i, "Tests");
+		str_copy(GameServer()->m_apPlayers[i]->m_TeeInfos.m_SkinName, "blacktee", sizeof(GameServer()->m_apPlayers[i]->m_TeeInfos.m_SkinName));
+	}*/
 }
 
 void CGameControllerASF::OnPlayerJoin(CPlayer *pPlayer)
@@ -36,7 +47,7 @@ void CGameControllerASF::OnPreTick()
 	if(!IsGameRunning())
 		return;
 	
-	for(int i = 0; i < MAX_CLIENTS; i ++)
+	/*for(int i = 0; i < MAX_CLIENTS; i ++)
 	{
 		if(!GameServer()->m_apPlayers[i])
 			continue;
@@ -44,10 +55,7 @@ void CGameControllerASF::OnPreTick()
 		if(!GameServer()->m_apPlayers[i]->GetCharacter())
 			continue;
 		
-		m_TestStand[i]->SmoothMove(vec2(GameServer()->GetPlayerChar(i)->m_LatestInput.m_TargetX+GameServer()->GetPlayerChar(i)->GetPos().x, GameServer()->GetPlayerChar(i)->m_LatestInput.m_TargetY+GameServer()->GetPlayerChar(i)->GetPos().y), 27.0f, false);
-		if(distance(m_TestStand[i]->GetPos(), GameServer()->m_apPlayers[i]->GetCharacter()->GetPos()) >= 800)
-			m_TestStand[i]->MoveTo(GameServer()->m_apPlayers[i]->GetCharacter()->GetPos());
-	}
+	}*/
 }
 
 void CGameControllerASF::OnPlayerLeave(CPlayer *pPlayer)
@@ -63,4 +71,10 @@ void CGameControllerASF::OnCharacterSwitchWeapon(CCharacter *pChr, int Wheel)
 {
 	//new CTextEntity(GameWorld(), pChr->GetPos(), CTextEntity::TYPE_SHOTGUN, CTextEntity::SIZE_LARGE, CTextEntity::ALIGN_MIDDLE, (char *)"BBB :::");
 
+}
+
+int CGameControllerASF::OnCharacterDeath(CCharacter *pVictim, CPlayer *pKiller, int Weapon)
+{
+	if(m_Stand[pVictim->GetPlayer()->GetCID()])
+		delete m_Stand[pVictim->GetPlayer()->GetCID()];
 }

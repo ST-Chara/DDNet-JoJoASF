@@ -224,6 +224,8 @@ void CLaser::Tick()
 
 	if((Server()->Tick() - m_EvalTick) > (Server()->TickSpeed() * Delay / 1000.0f))
 		DoBounce();
+
+	dbg_msg("normalLPOS", "X: %f  Y: %f", m_Pos.x, m_Pos.y);
 }
 
 void CLaser::TickPaused()

@@ -36,6 +36,7 @@ public:
 	virtual void Snap(int SnappingClient, int OtherMode) override;
 	virtual void Destroy() override;
 
+	vec2 GetRealPos();
 private:
 	vec2 m_Direction;
 	int m_TotalLifeSpan;
@@ -44,6 +45,7 @@ private:
 	int m_WeaponID;
 	FProjectileImpactCallback m_Callback;
 	int m_ID;
+	vec2 m_RealPos;
 
 	// DDRace
 	int m_TuneZone; //TODO: make curvature and property

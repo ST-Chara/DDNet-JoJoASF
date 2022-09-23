@@ -21,6 +21,8 @@ public:
     virtual void Attack(vec2 Pos) override;
 
     virtual void OnStandTick() override;
+
+    void HandleInterceptLaser();
 };
 
 #endif

@@ -132,6 +132,7 @@ void CProjectile::Tick()
 	vec2 CurPos = GetPos(Ct);
 	vec2 ColPos;
 	vec2 NewPos;
+	m_RealPos = CurPos;
 	int Collide = GameServer()->Collision()->IntersectLine(PrevPos, CurPos, &ColPos, &NewPos);
 	CCharacter *pOwnerChar = nullptr;
 	CPlayer *pOwnerPlayer = nullptr;
@@ -280,6 +281,11 @@ bool CProjectile::NetworkClipped(int SnappingClient)
 {
 	float Ct = (Server()->Tick() - m_StartTick) / (float)Server()->TickSpeed();
 	return NetworkPointClipped(SnappingClient, GetPos(Ct));
+}
+
+vec2 CProjectile::GetRealPos()
+{
+	return m_RealPos;
 }
 
 void CProjectile::Snap(int SnappingClient, int OtherMode)

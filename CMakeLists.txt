@@ -946,6 +946,8 @@ set_src(GAME_SERVER GLOB_RECURSE src/game/server
   entities/flag.h
   entities/gun.cpp
   entities/gun.h
+  entities/intercept-laser.cpp
+  entities/intercept-laser.h
   entities/laser.cpp
   entities/laser.h
   entities/light.cpp
