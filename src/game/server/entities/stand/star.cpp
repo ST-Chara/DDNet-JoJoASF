@@ -31,13 +31,15 @@ void CStar::Attack(vec2 TargetPos)
 
 void CStar::OnStandTick()
 {
+    if(!GameServer()->m_apPlayers[GetOwner()]->GetCharacter())
+        return;
     if(GetState() == EVENT_FOLLOW_POINT)
         SmoothMove(vec2(GameServer()->GetPlayerChar(GetOwner())->m_LatestInput.m_TargetX+GameServer()->GetPlayerChar(GetOwner())->GetPos().x, GameServer()->GetPlayerChar(GetOwner())->m_LatestInput.m_TargetY+GameServer()->GetPlayerChar(GetOwner())->GetPos().y), 27.0f, false);
 	if(distance(GetPos(), GameServer()->m_apPlayers[GetOwner()]->GetCharacter()->GetPos()) >= 800 && (GetEvent() == EVENT_FOLLOW_POINT || GetEvent() == EVENT_FOLLOW_MASTER))
 		MoveTo(GameServer()->m_apPlayers[GetOwner()]->GetCharacter()->GetPos());
 
     if(GetEvent() == EVENT_APPROACHING_POINT)
-        SmoothMove(m_APoint, 3.0f, false);
+        SmoothMove(m_APoint, 12.0f, false);
 
     if(m_ATick >= 0)
         m_ATick--;
