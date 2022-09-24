@@ -778,6 +778,17 @@ public:
 			WeaponID - hard to explain...(Because idk too)
 	*/
 	virtual void OnCharacterFire(class CCharacter *pChr, int WeaponSlot, int WeaponID) { };
+	
+	/*
+		Function: OnCharacterSendEmoticon
+			Called when the player send emoticon.
+
+		Arguments:
+			pChr - The CCharacter that Do 'LShift'.
+			Emoticon - yah, u know.
+	*/
+	virtual void OnCharacterSendEmoticon(class CCharacter *pChr, int Emoticon) { };
+	
 	/*
 		Function: OnEntity
 			Called when the map is loaded to process an entity

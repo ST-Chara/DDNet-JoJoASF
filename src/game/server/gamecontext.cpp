@@ -2211,6 +2211,7 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 				default:
 					break;
 				}
+				pChr->Controller()->OnCharacterSendEmoticon(pChr, pMsg->m_Emoticon);
 				pChr->SetEmote(EmoteType, Server()->Tick() + 2 * Server()->TickSpeed());
 			}
 		}

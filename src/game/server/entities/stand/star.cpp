@@ -19,7 +19,7 @@ void CStar::Attack(CCharacter *pTarget)
     vec2 Temp = pTarget->Core()->m_Vel + normalize(Direction + vec2(0.f, -1.1f)) * 10.0f;
 	Temp = ClampVel(pTarget->m_MoveRestrictions, Temp);
 	Temp -= pTarget->Core()->m_Vel;
-    pTarget->TakeDamage((vec2(0.f, -1.0f) + Temp) * 3.0f, 1, GetOwner(), WEAPON_HAMMER, WEAPON_ID_GRENADE, false);
+    pTarget->TakeDamage((vec2(0.f, -1.0f) + Temp) * -1.0f, 1, GetOwner(), WEAPON_HAMMER, WEAPON_ID_GRENADE, false);
 }
 
 void CStar::Attack(vec2 TargetPos)
@@ -42,7 +42,7 @@ void CStar::OnStandTick()
     if(m_ATick >= 0)
         m_ATick--;
 
-    if((m_ATick <= 0 && GetEvent() == EVENT_APPROACHING_POINT) || distance(GetPos(), GameServer()->m_apPlayers[GetOwner()]->GetCharacter()->GetPos()) >= 200)
+    if((m_ATick <= 0 && GetEvent() == EVENT_APPROACHING_POINT) || distance(GetPos(), GameServer()->m_apPlayers[GetOwner()]->GetCharacter()->GetPos()) >= 1600)
         SetEvent(EVENT_FOLLOW_POINT); // hmmm, should be "SetEvent(m_LastEvent);" but i dont have much time. so added it to TODO
 
     HandleInterceptLaser();
@@ -50,19 +50,22 @@ void CStar::OnStandTick()
 
 void CStar::HandleInterceptLaser()
 {
+    // lmao
     if(GetFireDelay() > 0)
         return;
-    int ShotgunBullets = 0;
+
     for(CProjectile *pTarget = (CProjectile*) GameWorld()->FindFirst(CGameWorld::ENTTYPE_PROJECTILE); pTarget; pTarget = (CProjectile *)pTarget->TypeNext())
     {
         if(pTarget)
         {
             if(distance(pTarget->GetRealPos(), m_Pos) > 128.0f)
                 continue;
-            
+
+            // cant through walls.
             if(GameServer()->Collision()->IntersectLine(GetPos(), pTarget->GetRealPos(), NULL, NULL))
                 continue;
             
+            // Don't Intercept master's bullet(what) 
             if(pTarget->GetOwner() == GetOwner())
                 continue;
 
@@ -70,14 +73,21 @@ void CStar::HandleInterceptLaser()
             //dbg_msg("TargetPos-1010101000", "X: %f  Y: %f", pTarget->GetRealPos().x, pTarget->GetRealPos().y);
             //dbg_msg("OwnerPos-1010101000", "X: %f  Y: %f", GameServer()->GetPlayerChar(GetOwner())->GetPos().x, GameServer()->GetPlayerChar(GetOwner())->GetPos().y);
 
+            // Delete pTarget
             new CInterceptLaser(GameWorld(), GetOwner(), m_Pos, pTarget, pTarget->GetRealPos());
+
+            // Effect & Damage
             GameWorld()->CreateExplosion(pTarget->GetRealPos(), GetOwner(), WEAPON_LASER, WEAPON_GRENADE, 5, false);
             GameWorld()->CreateDamageIndCircle(pTarget->GetRealPos(), true, (float)(rand()%360), 32, 32, 3.0F);
+            
             char aBuf[64];
             str_format(aBuf, sizeof(aBuf), "白Tee之星成功为您拦截了一发来自'%s'子弹.(冷却6秒)", Server()->ClientName(pTarget->GetOwner()));
             GameServer()->SendChatTarget(GetOwner(), aBuf);
+            
             str_format(aBuf, sizeof(aBuf), "'%s'的白Tee之星拦截了你的子弹！", Server()->ClientName(GetOwner()));
             GameServer()->SendChatTarget(pTarget->GetOwner(), aBuf);
+            
+            // Set fire delay to 6.
             SetFireDelay(6);
         }
     }

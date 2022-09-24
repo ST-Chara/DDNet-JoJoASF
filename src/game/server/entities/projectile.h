@@ -37,6 +37,7 @@ public:
 	virtual void Destroy() override;
 
 	vec2 GetRealPos();
+	int GetStartTick() { return m_StartTick; };
 private:
 	vec2 m_Direction;
 	int m_TotalLifeSpan;
