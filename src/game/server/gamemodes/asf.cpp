@@ -90,9 +90,65 @@ void CGameControllerASF::OnCharacterFire(class CCharacter *pChr, int WeaponSlot,
 
 void CGameControllerASF::OnGameStart(bool IsRound)
 {
-	for(int i = 0; i < MAX_CLIENTS; i ++)
+	/*if(!IsRound)
 	{
-		if(m_Stand[i])
-			m_Stand[i]->Destroy();
+		for(int i = 0; i < MAX_CLIENTS; i ++)
+		{
+			if(GetStand(i))
+				GetStand(i)->Destroy();
+		}
+	}*/
+}
+
+IStand *CGameControllerASF::GetStand(int Owner)
+{
+	if(m_Stand[Owner])
+		return m_Stand[Owner];
+	return 0;
+}
+
+// game
+void CGameControllerASF::DoWincheckRound()
+{
+	/* check for time based win
+	if(!m_SuddenDeath && m_GameInfo.m_TimeLimit > 0 && (Server()->Tick() - m_GameStartTick) >= m_GameInfo.m_TimeLimit * Server()->TickSpeed() * 60)
+	{
+		for(int i = 0; i < MAX_CLIENTS; ++i)
+		{
+			CPlayer *pPlayer = GetPlayerIfInRoom(i);
+			if(pPlayer && pPlayer->GetTeam() != TEAM_SPECTATORS &&
+				(!pPlayer->m_RespawnDisabled ||
+					(pPlayer->GetCharacter() && pPlayer->GetCharacter()->IsAlive())))
+				pPlayer->m_Score++;
+		}
+
+		EndRound();
 	}
+	else
+	{
+		// check for survival win
+		CPlayer *pAlivePlayer = 0;
+		int AlivePlayerCount = 0;
+		for(int i = 0; i < MAX_CLIENTS; ++i)
+		{
+			CPlayer *pPlayer = GetPlayerIfInRoom(i);
+			if(pPlayer && pPlayer->GetTeam() != TEAM_SPECTATORS &&
+				(!pPlayer->m_RespawnDisabled ||
+					(pPlayer->GetCharacter() && pPlayer->GetCharacter()->IsAlive())))
+			{
+				++AlivePlayerCount;
+				pAlivePlayer = pPlayer;
+			}
+		}
+
+		if(AlivePlayerCount == 0) // no winner
+		{
+			EndRound();
+		}
+		else if(AlivePlayerCount == 1) // 1 winner
+		{
+			pAlivePlayer->m_Score++;
+			EndRound();
+		}
+	}*/
 }
