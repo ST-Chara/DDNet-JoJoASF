@@ -22,6 +22,7 @@ public:
 
     virtual void OnInit() override;
     virtual void OnPreTick() override;
+    virtual void OnGameStart(bool IsRound) override;
 
     IStand *m_Stand[MAX_CLIENTS];
 };

@@ -87,3 +87,12 @@ void CGameControllerASF::OnCharacterFire(class CCharacter *pChr, int WeaponSlot,
 		m_pStand->OnOwnerFire(WeaponSlot, WeaponID);
 	}
 }
+
+void CGameControllerASF::OnGameStart(bool IsRound)
+{
+	for(int i = 0; i < MAX_CLIENTS; i ++)
+	{
+		if(m_Stand[i])
+			m_Stand[i]->Destroy();
+	}
+}
